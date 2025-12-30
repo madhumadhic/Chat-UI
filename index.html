@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title> CHAT UI</title>
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; overflow: hidden; }
+        
+        /* The CSS Logic: Hide all chat content by default */
+        .chat-content { display: none; }
+
+        /* When a specific radio button is checked, show the corresponding chat content */
+        #user-1:checked ~ main #chat-1,
+        #user-2:checked ~ main #chat-2,
+        #user-3:checked ~ main #chat-3 {
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+        }
+
+        /* Highlight the active contact in the sidebar */
+        #user-1:checked ~ aside label[for="user-1"],
+        #user-2:checked ~ aside label[for="user-2"],
+        #user-3:checked ~ aside label[for="user-3"] {
+            background-color: rgba(255, 255, 255, 0.05);
+            border-left: 4px solid #6366f1;
+        }
+
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+    </style>
+</head>
+<body class="bg-[#0f111a] h-screen flex text-slate-200">
+
+    <input type="radio" name="chat-selector" id="user-1" class="hidden" checked>
+    <input type="radio" name="chat-selector" id="user-2" class="hidden">
+    <input type="radio" name="chat-selector" id="user-3" class="hidden">
+
+    <aside class="w-20 md:w-80 border-r border-white/5 bg-[#161925] flex flex-col z-20">
+        <div class="p-6 border-b border-white/5 hidden md:block">
+            <h1 class="text-xl font-bold text-white tracking-tight">Messages</h1>
+        </div>
+
+        <div class="flex-1 overflow-y-auto custom-scrollbar p-2 space-y-2">
+            <label for="user-1" class="flex items-center gap-4 p-4 rounded-xl cursor-pointer hover:bg-white/5 transition group block">
+                <div class="w-10 h-10 md:w-12 md:h-12 shrink-0 rounded-full bg-orange-500 flex items-center justify-center font-bold text-white shadow-lg shadow-orange-500/10">A</div>
+                <div class="hidden md:block flex-1 min-w-0">
+                    <div class="flex justify-between items-baseline">
+                        <span class="font-semibold text-slate-200">Arjun Sharma</span>
+                    </div>
+                    <p class="text-xs text-slate-500 truncate mt-1">Check the new prototypes...</p>
+                </div>
+            </label>
+
+            <label for="user-2" class="flex items-center gap-4 p-4 rounded-xl cursor-pointer hover:bg-white/5 transition group block">
+                <div class="w-10 h-10 md:w-12 md:h-12 shrink-0 rounded-full bg-pink-500 flex items-center justify-center font-bold text-white shadow-lg shadow-pink-500/10">P</div>
+                <div class="hidden md:block flex-1 min-w-0">
+                    <div class="flex justify-between items-baseline">
+                        <span class="font-semibold text-slate-200">Priya Patel</span>
+                    </div>
+                    <p class="text-xs text-slate-500 truncate mt-1">The report is finalized.</p>
+                </div>
+            </label>
+
+            <label for="user-3" class="flex items-center gap-4 p-4 rounded-xl cursor-pointer hover:bg-white/5 transition group block">
+                <div class="w-10 h-10 md:w-12 md:h-12 shrink-0 rounded-full bg-emerald-500 flex items-center justify-center font-bold text-white shadow-lg shadow-emerald-500/10">R</div>
+                <div class="hidden md:block flex-1 min-w-0">
+                    <div class="flex justify-between items-baseline">
+                        <span class="font-semibold text-slate-200">Rahul Verma</span>
+                    </div>
+                    <p class="text-xs text-slate-500 truncate mt-1">Coffee tomorrow?</p>
+                </div>
+            </label>
+        </div>
+    </aside>
+
+    <main class="flex-1 flex flex-col bg-[#0f111a] relative">
+        
+        <div id="chat-1" class="chat-content">
+            <header class="h-20 border-b border-white/5 flex items-center px-6 bg-[#161925]/50 backdrop-blur-xl">
+                <div class="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center font-bold mr-4">A</div>
+                <div><h2 class="font-bold text-white">Arjun Sharma</h2><p class="text-[10px] text-emerald-500 uppercase tracking-tighter">Online</p></div>
+            </header>
+            <div class="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
+                <div class="flex justify-start"><div class="bg-[#1c202e] p-4 rounded-2xl rounded-tl-none max-w-[80%] text-sm">Hi! Did you get a chance to look at the new UI components?</div></div>
+                <div class="flex justify-end"><div class="bg-indigo-600 p-4 rounded-2xl rounded-tr-none max-w-[80%] text-sm">Just checking them now. They look incredible!</div></div>
+            </div>
+        </div>
+
+        <div id="chat-2" class="chat-content">
+            <header class="h-20 border-b border-white/5 flex items-center px-6 bg-[#161925]/50 backdrop-blur-xl">
+                <div class="w-10 h-10 rounded-full bg-pink-500 flex items-center justify-center font-bold mr-4">P</div>
+                <div><h2 class="font-bold text-white">Priya Patel</h2><p class="text-[10px] text-slate-500 uppercase tracking-tighter">Last seen 2h ago</p></div>
+            </header>
+            <div class="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
+                <div class="flex justify-start"><div class="bg-[#1c202e] p-4 rounded-2xl rounded-tl-none max-w-[80%] text-sm">The Q4 financial report is finished. Shall I send it to the team?</div></div>
+                <div class="flex justify-end"><div class="bg-indigo-600 p-4 rounded-2xl rounded-tr-none max-w-[80%] text-sm">Yes please. Double check the margins on page 4 first.</div></div>
+            </div>
+        </div>
+
+        <div id="chat-3" class="chat-content">
+            <header class="h-20 border-b border-white/5 flex items-center px-6 bg-[#161925]/50 backdrop-blur-xl">
+                <div class="w-10 h-10 rounded-full bg-emerald-500 flex items-center justify-center font-bold mr-4">R</div>
+                <div><h2 class="font-bold text-white">Rahul Verma</h2><p class="text-[10px] text-emerald-500 uppercase tracking-tighter">Online</p></div>
+            </header>
+            <div class="flex-1 overflow-y-auto p-6 space-y-4 custom-scrollbar">
+                <div class="flex justify-start"><div class="bg-[#1c202e] p-4 rounded-2xl rounded-tl-none max-w-[80%] text-sm">Bro, are we still meeting for coffee tomorrow morning?</div></div>
+                <div class="flex justify-end"><div class="bg-indigo-600 p-4 rounded-2xl rounded-tr-none max-w-[80%] text-sm">Definately! 10 AM at the usual spot?</div></div>
+            </div>
+        </div>
+
+        <footer class="p-6 bg-[#0f111a] mt-auto">
+            <div class="max-w-4xl mx-auto flex items-center gap-4 bg-[#161925] rounded-2xl px-5 py-2 border border-white/5">
+                <input type="text" placeholder="Write a message..." class="bg-transparent flex-1 py-3 outline-none text-sm text-white">
+                <button class="bg-indigo-600 p-2.5 rounded-xl">
+                    <svg viewBox="0 0 24 24" class="w-5 h-5 fill-white"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"></path></svg>
+                </button>
+            </div>
+        </footer>
+    </main>
+
+</body>
+</html>
